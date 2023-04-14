@@ -169,11 +169,11 @@ return [
         /*
          * Application Service Providers...
          */
-        App\Providers\AppServiceProvider::class,
-        App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
-        App\Providers\EventServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
+        BTNewsApp\App\Providers\AppServiceProvider::class,
+        BTNewsApp\App\Providers\AuthServiceProvider::class,
+        // BTNewsApp\Providers\BroadcastServiceProvider::class,
+        BTNewsApp\App\Providers\EventServiceProvider::class,
+        BTNewsApp\App\Providers\RouteServiceProvider::class,
 
     ],
 

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Middleware;
+namespace BTNewsApp\Http\Middleware;
 
-use App\Providers\RouteServiceProvider;
+use BTNewsApp\Providers\RouteServiceProvider;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
