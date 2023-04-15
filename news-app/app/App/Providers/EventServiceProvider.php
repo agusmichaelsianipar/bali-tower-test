@@ -18,6 +18,9 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+        \BTNewsApp\App\Log\Event\LogActivityEvent::class => [
+            \BTNewsApp\App\Log\Listener\StoreLogActivityListener::class,
+        ],
     ];
 
     /**

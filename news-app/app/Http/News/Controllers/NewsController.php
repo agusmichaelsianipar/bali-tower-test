@@ -2,6 +2,7 @@
 
 namespace BTNewsApp\Http\News\Controllers;
 
+use Illuminate\Http\Request;
 use BTNewsApp\App\Controllers\Controller;
 use BTNewsApp\Http\News\Requests\CreateNewsRequest;
 use BTNewsApp\Http\News\Requests\UpdateNewsRequest;
@@ -11,7 +12,7 @@ class NewsController extends Controller
 {
     private $newsRepository;
     public function __construct(NewsRepositoryInterface $newsRepository){
-
+        // $this->middleware('is.admin')->except('index','show');
         $this->newsRepository = $newsRepository;
 
     }
@@ -29,7 +30,15 @@ class NewsController extends Controller
     {
         $imageName = $this->newsRepository->storeImageNews($request);
         
-        return $this->newsRepository->storeNews($request, $imageName);
+        $news = $this->newsRepository->storeNews($request, $imageName);
+
+        $this->newsRepository->newsLog("News successfully created!",$request->url(), $request->method(), $request->ip(), $request->userAgent());
+
+        return response()->json([
+            'status' => true,
+            'message'=> "News created successfully",
+            'news' => $news,
+        ],200);
     }
 
     public function update(UpdateNewsRequest $request, $id)
@@ -38,12 +47,25 @@ class NewsController extends Controller
 
         $this->newsRepository->destroyImageStorage($id);
 
-        return $this->newsRepository->updateNewsById($request, $id, $imageName);
+        $news = $this->newsRepository->updateNewsById($request, $id, $imageName);
         
+        $this->newsRepository->newsLog("News successfully updated!",$request->url(), $request->method(), $request->ip(), $request->userAgent());
+
+        return response()->json([
+            'status' => true,
+            'message'=> "News updated successfully",
+        ],200);
     }
 
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        return $this->newsRepository->destroyNewsById($id);
+        $this->newsRepository->destroyNewsById($id);
+
+        $this->newsRepository->newsLog("News successfully deleted!", $request->url(), $request->method(), $request->ip(), $request->userAgent());
+
+        return response()->json([
+            'status' => true,
+            'message'=> "News deleted successfully",
+        ],200);
     }
 }

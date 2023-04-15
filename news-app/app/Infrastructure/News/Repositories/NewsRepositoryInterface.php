@@ -18,6 +18,8 @@ Interface NewsRepositoryInterface{
     public function updateNewsById($data, $id, $imageName);
     
     public function destroyNewsById($id);
+
+    public function newsLog($event, $url, $method, $ip, $user_agent);
 }
 
 ?>

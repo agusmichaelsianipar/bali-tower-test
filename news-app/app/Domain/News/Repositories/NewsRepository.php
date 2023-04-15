@@ -4,6 +4,7 @@ namespace BTNewsApp\Domain\News\Repositories;
 
 use BTNewsApp\Domain\News\News;
 use Illuminate\Support\Facades\Storage;
+use BTNewsApp\App\Log\Event\LogActivityEvent;
 use BTNewsApp\Http\News\Resources\NewsResource;
 use BTNewsApp\Infrastructure\News\Repositories\NewsRepositoryInterface;
 
@@ -13,6 +14,13 @@ class NewsRepository implements NewsRepositoryInterface {
 
     public function __construct(News $model){
         $this->model = $model;
+    }
+
+    public function newsLog($event, $url, $method, $ip, $user_agent){
+        $user_id = 1 ;
+
+        event(new LogActivityEvent($event, $user_id, $url,$method, $ip,$user_agent));
+
     }
 
     public function index(){

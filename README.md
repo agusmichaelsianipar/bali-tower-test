@@ -16,9 +16,9 @@
 ## HOW TO INSTALL
 - Please make sure you have compatible system
 - Clone this project into your local machine
-> git clone https://github.com/agusmichaelsianipar/jds_news_app.git
+> git clone https://github.com/agusmichaelsianipar/bali-tower-test.git
 - Move your terminal directory into the project
-> cd jds_news_app
+> cd bali-tower-test
 - Install composer dependecies
 > composer install
 - Install NPM dependecies
@@ -38,4 +38,4 @@
 *DONE*
 
 ## POSTMAN COLLECTION LINK
-https://www.postman.com/agusmichaelsianipar/workspace/jds-workspace/collection/25289606-5b2a589d-3c0c-4b80-b8ab-e0ae5b28e9d3?action=share&creator=25289606
+https://www.postman.com/agusmichaelsianipar/workspace/public-workspace/api/e182a954-208c-47fe-80c6-d6718c6fe71b
