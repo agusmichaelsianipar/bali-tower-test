@@ -14,21 +14,25 @@ class CommentRepository implements CommentRepositoryInterface{
         $this->model = $model;
     }
 
-    public function getCommentById($id)
-    {
-        return new CommentResource($this->model->with('news')->findOrFail($id));
+    public function getCommentByNewsId($newsId){
+
     }
 
-    public function storeComment($data, $guest)
+    public function getCommentById($commentId)
     {
-        $comment = Comment::create([
-            'member_id' => $guest,
-            'news_id' => $data->news,
-            'title' => $data->title,
-            'content' => $data->content
-        ]);
+        return new CommentResource($this->model->with('news')->findOrFail($commentId));
+    }
 
-        return new CommentResource($comment);
+    public function storeComment($data)
+    {
+        
+    }
+
+    public function updateComment($data, $commentId){
+
+    }
+    public function deleteComment($commentId){
+
     }
 
 }

@@ -4,9 +4,15 @@ namespace App\Repositories\Comment;
 
 Interface CommentRepositoryInterface{
 
-    public function getCommentById($id);
+    public function getCommentByNewsId($newsId);
 
-    public function storeComment($data, $guest);
+    public function getCommentById($commentId);
+
+    public function storeComment($data);
+
+    public function updateComment($data, $id);
+
+    public function deleteComment($id);
 }
 
 ?>

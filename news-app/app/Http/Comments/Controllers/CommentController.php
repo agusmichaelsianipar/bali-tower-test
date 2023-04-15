@@ -17,11 +17,6 @@ class CommentController extends Controller
         //
     }
 
-    public function create()
-    {
-        //
-    }
-
     public function store(Request $request)
     {
         //
@@ -29,12 +24,7 @@ class CommentController extends Controller
 
     public function show($id)
     {
-        //
-    }
-
-    public function edit($id)
-    {
-        //
+        return $this->commentRepository->getCommentById($id);
     }
 
     public function update(Request $request, $id)
