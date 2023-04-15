@@ -1,6 +1,6 @@
 <?php
 
-namespace BTNewsApp\Models;
+namespace BTNewsApp\Domain\Users;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -19,6 +19,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'isAdmin',
         'email',
         'password',
     ];

@@ -21,7 +21,8 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         \BTNewsApp\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
-        // \BTNews\Application\Middleware\AcceptJsonHeaderMiddleware::class,
+        \BTNewsApp\Http\Middleware\AcceptJsonHeader::class,
+
     ];
 
     /**
@@ -44,6 +45,7 @@ class Kernel extends HttpKernel
             // \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
             'throttle:api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            \BTNewsApp\Http\Middleware\AcceptJsonHeader::class,
         ],
     ];
 
