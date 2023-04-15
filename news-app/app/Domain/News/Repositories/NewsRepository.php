@@ -81,7 +81,11 @@ class NewsRepository implements NewsRepositoryInterface {
     
     public function destroyNewsById($id){
         
+        $news = News::findOrFail($id);
 
+        $news->delete();
+
+        return 1;
     }
 }
 

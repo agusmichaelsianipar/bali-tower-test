@@ -45,6 +45,6 @@ class NewsController extends Controller
 
     public function destroy($id)
     {
-        //
+        return $this->newsRepository->destroyNewsById($id);
     }
 }
