@@ -4,7 +4,7 @@ namespace BTNewsApp\Domain\News\Repositories;
 
 use BTNewsApp\Domain\News\News;
 use Illuminate\Support\Facades\Storage;
-use BTNewsApp\Http\Resources\News\NewsResource;
+use BTNewsApp\Http\News\Resources\NewsResource;
 use BTNewsApp\Infrastructure\News\Repositories\NewsRepositoryInterface;
 
 class NewsRepository implements NewsRepositoryInterface {

@@ -1,7 +1,8 @@
 <?php
 
-namespace BTNewsApp\Http\Resources\News;
+namespace BTNewsApp\Http\News\Resources;
 
+use BTNewsApp\Http\Users\Resources\UserResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class NewsResource extends JsonResource
@@ -19,7 +20,8 @@ class NewsResource extends JsonResource
             'title' => $this->title,
             'content' => $this->content,
             'image' => $this->image,
-            'author' => $this->user_id,
+            'author' => new UserResource($this->user_id),
+            
         ];
     }
 }

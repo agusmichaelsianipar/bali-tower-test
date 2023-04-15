@@ -26,7 +26,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string|null
      */
-    protected $namespace = 'BTNewsApp\\Http\\Controllers';
+    protected $namespace = 'BTNewsApp\\Http';
 
     /**
      * Define your route model bindings, pattern filters, etc.

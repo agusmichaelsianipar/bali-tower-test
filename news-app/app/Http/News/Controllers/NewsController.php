@@ -1,8 +1,7 @@
 <?php
 
-namespace BTNewsApp\Http\Controllers\News;
+namespace BTNewsApp\Http\News\Controllers;
 
-use Illuminate\Http\Request;
 use BTNewsApp\App\Controllers\Controller;
 use BTNewsApp\Http\News\Requests\CreateNewsRequest;
 use BTNewsApp\Http\News\Requests\UpdateNewsRequest;

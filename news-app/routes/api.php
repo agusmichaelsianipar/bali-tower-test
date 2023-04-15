@@ -1,8 +1,7 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use News\NewsController;
+use News\Controllers\NewsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +15,6 @@ use News\NewsController;
 */
 
 Route::apiResource('/news', NewsController::class);
+
+Route::apiResource('/comments', CommentController::class);
+
