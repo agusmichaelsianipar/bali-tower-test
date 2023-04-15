@@ -30,14 +30,16 @@ class CommentRepository implements CommentRepositoryInterface{
 
     public function storeComment($data, $newsId)
     {
-        $user_id = 2;
+        $user_id = 1;
 
-        return Comment::create([
+        $comment = Comment::create([
             'user_id'=>$user_id,
             'news_id' => $newsId,
             'title' => $data->title,
             'content'=> $data->content
         ]);
+
+        return new CommentResource($comment);
     }
 
     public function updateComment($data, $commentId){

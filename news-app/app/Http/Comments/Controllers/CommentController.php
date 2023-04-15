@@ -4,6 +4,8 @@ namespace BTNewsApp\Http\Comments\Controllers;
 
 use Illuminate\Http\Request;
 use BTNewsApp\App\Controllers\Controller;
+use BTNewsApp\Http\Comments\Requests\CreateCommentRequest;
+use BTNewsApp\Http\Comments\Requests\UpdateCommentRequest;
 use BTNewsApp\Infrastructure\Comments\Repositories\CommentRepositoryInterface;
 
 class CommentController extends Controller
@@ -19,7 +21,7 @@ class CommentController extends Controller
         
     }
 
-    public function store(Request $request, $newsId)
+    public function store(CreateCommentRequest $request, $newsId)
     {
         return $this->commentRepository->storeComment($request, $newsId);
     }
@@ -29,7 +31,7 @@ class CommentController extends Controller
         return $this->commentRepository->getCommentById($commentId);
     }
 
-    public function update(Request $request, $id)
+    public function update(UpdateCommentRequest $request, $id)
     {
         //
     }
