@@ -1,7 +1,9 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use News\Controllers\NewsController;
+use Illuminate\Support\Facades\Route;
+use BTNewsApp\Http\Users\Controllers\UsersController;
+use Comments\Controllers\CommentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +15,8 @@ use News\Controllers\NewsController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+Route::middleware('auth:api')->get('/users', [ UsersController::class,'user']);
 
 Route::apiResource('/news', NewsController::class);
 

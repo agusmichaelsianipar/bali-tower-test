@@ -174,6 +174,7 @@ return [
         // BTNewsApp\Providers\BroadcastServiceProvider::class,
         BTNewsApp\App\Providers\EventServiceProvider::class,
         BTNewsApp\App\Providers\RouteServiceProvider::class,
+        Laravel\Passport\PassportServiceProvider::class,
 
     ],
 

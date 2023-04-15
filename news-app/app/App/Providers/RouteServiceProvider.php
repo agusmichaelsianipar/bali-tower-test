@@ -28,6 +28,8 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected $namespace = 'BTNewsApp\\Http';
 
+    protected $auth_namespace = 'BTNewsApp\\Http\\Controllers';
+
     /**
      * Define your route model bindings, pattern filters, etc.
      *
@@ -44,7 +46,7 @@ class RouteServiceProvider extends ServiceProvider
                 ->group(base_path('routes/api.php'));
 
             Route::middleware('web')
-                ->namespace($this->namespace)
+                ->namespace($this->auth_namespace)
                 ->group(base_path('routes/web.php'));
         });
     }

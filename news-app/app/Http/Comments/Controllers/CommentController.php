@@ -1,6 +1,6 @@
 <?php
 
-namespace BTNewsApp\Http\Controllers\Comments\Controllers;
+namespace BTNewsApp\Http\Comments\Controllers;
 
 use BTNewsApp\App\Controllers\Controller;
 use Illuminate\Http\Request;

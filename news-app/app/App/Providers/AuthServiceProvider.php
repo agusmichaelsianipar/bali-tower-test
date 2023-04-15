@@ -2,8 +2,9 @@
 
 namespace BTNewsApp\App\Providers;
 
-use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Laravel\Passport\Passport;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -13,7 +14,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array<class-string, class-string>
      */
     protected $policies = [
-        // 'BTNewsApp\Models\Model' => 'BTNewsApp\Policies\ModelPolicy',
+        'BTNewsApp\Models\Model' => 'BTNewsApp\Policies\ModelPolicy',
     ];
 
     /**
@@ -24,7 +25,9 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
-
-        //
+        
+        if (! $this->app->routesAreCached()) {
+            Passport::routes();
+        }
     }
 }
