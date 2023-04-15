@@ -43,10 +43,21 @@ class CommentRepository implements CommentRepositoryInterface{
     }
 
     public function updateComment($data, $commentId){
+        
+        Comment::where('id', $commentId)->update([
+            'title' => $data->title,
+            'content' => $data->content,
+        ]);
 
+        return true;
     }
     public function deleteComment($commentId){
+        
+        $comment = Comment::findOrFail($commentId);
 
+        $comment->delete();
+
+        return true;
     }
 
 }

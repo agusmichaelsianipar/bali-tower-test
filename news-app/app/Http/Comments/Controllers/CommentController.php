@@ -31,13 +31,13 @@ class CommentController extends Controller
         return $this->commentRepository->getCommentById($commentId);
     }
 
-    public function update(UpdateCommentRequest $request, $id)
+    public function update(UpdateCommentRequest $request, $newsId, $commentId)
     {
-        //
+        return $this->commentRepository->updateComment($request, $commentId);
     }
 
-    public function destroy($id)
+    public function destroy($commentId, $newsId)
     {
-        //
+        return $this->commentRepository->deleteComment($newsId);
     }
 }
