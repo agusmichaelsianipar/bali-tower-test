@@ -2,8 +2,9 @@
 
 use News\Controllers\NewsController;
 use Illuminate\Support\Facades\Route;
-use BTNewsApp\Http\Users\Controllers\UsersController;
 use Comments\Controllers\CommentController;
+use BTNewsApp\Http\Log\Controllers\LogController;
+use BTNewsApp\Http\Users\Controllers\UsersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,3 +23,4 @@ Route::apiResource('/news', NewsController::class);
 
 Route::apiResource('news/{newsId}/comments', CommentController::class);
 
+Route::get('/logs', [LogController::class,'index']);

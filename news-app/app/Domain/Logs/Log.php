@@ -2,8 +2,9 @@
 
 namespace BTNewsApp\Domain\Logs;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use BTNewsApp\Domain\Users\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Log extends Model
 {
@@ -23,5 +24,9 @@ class Log extends Model
             'ip_address' => $ip_address,
             'user_agent' => $user_agent,
         ]);
+    }
+
+    public function user(){
+        return $this->belongsTo(User::class);
     }
 }

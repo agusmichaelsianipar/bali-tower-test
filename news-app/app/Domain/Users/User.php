@@ -2,6 +2,7 @@
 
 namespace BTNewsApp\Domain\Users;
 
+use BTNewsApp\Domain\Logs\Log;
 use BTNewsApp\Domain\News\News;
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
@@ -46,5 +47,9 @@ class User extends Authenticatable
 
     public function news(){
         return $this->hasMany(News::class);
+    }
+
+    public function log(){
+        return $this->hasMany(Log::class);
     }
 }
