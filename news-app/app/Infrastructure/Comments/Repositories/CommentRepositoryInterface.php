@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Repositories\Comment;
+namespace BTNewsApp\Infrastructure\Comments\Repositories;
 
 Interface CommentRepositoryInterface{
 
@@ -8,7 +8,7 @@ Interface CommentRepositoryInterface{
 
     public function getCommentById($commentId);
 
-    public function storeComment($data);
+    public function storeComment($data, $newsId);
 
     public function updateComment($data, $id);
 

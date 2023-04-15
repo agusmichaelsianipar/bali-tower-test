@@ -20,7 +20,7 @@ class NewsResource extends JsonResource
             'title' => $this->title,
             'content' => $this->content,
             'image' => $this->image,
-            'author' => new UserResource($this->user_id),
+            'author' => new UserResource($this->user),
             
         ];
     }

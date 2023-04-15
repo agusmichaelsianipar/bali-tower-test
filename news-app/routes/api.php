@@ -20,5 +20,5 @@ Route::middleware('auth:api')->get('/users', [ UsersController::class,'user']);
 
 Route::apiResource('/news', NewsController::class);
 
-Route::apiResource('/comments', CommentController::class);
+Route::apiResource('news/{newsId}/comments', CommentController::class);
 

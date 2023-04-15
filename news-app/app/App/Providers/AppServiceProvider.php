@@ -4,9 +4,9 @@ namespace BTNewsApp\App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use BTNewsApp\Domain\News\Repositories\NewsRepository;
-use App\Repositories\Comment\CommentRepositoryInterface;
 use BTNewsApp\Domain\Comments\Repositories\CommentRepository;
 use BTNewsApp\Infrastructure\News\Repositories\NewsRepositoryInterface;
+use BTNewsApp\Infrastructure\Comments\Repositories\CommentRepositoryInterface;
 
 class AppServiceProvider extends ServiceProvider
 {
