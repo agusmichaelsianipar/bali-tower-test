@@ -2,10 +2,11 @@
 
 namespace BTNewsApp\Http\Controllers\News;
 
-use BTNewsApp\Http\News\Requests\CreateNewsRequest;
-use BTNewsApp\Infrastructure\News\Repositories\NewsRepositoryInterface;
-use BTNewsApp\App\Controllers\Controller;
 use Illuminate\Http\Request;
+use BTNewsApp\App\Controllers\Controller;
+use BTNewsApp\Http\News\Requests\CreateNewsRequest;
+use BTNewsApp\Http\News\Requests\UpdateNewsRequest;
+use BTNewsApp\Infrastructure\News\Repositories\NewsRepositoryInterface;
 
 class NewsController extends Controller
 {
@@ -32,9 +33,14 @@ class NewsController extends Controller
         return $this->newsRepository->storeNews($request, $imageName);
     }
 
-    public function update(Request $request, $id)
+    public function update(UpdateNewsRequest $request, $id)
     {
-        //
+        $imageName = $this->newsRepository->storeImageNews($request);
+
+        $this->newsRepository->destroyImageStorage($id);
+
+        return $this->newsRepository->updateNewsById($request, $id, $imageName);
+        
     }
 
     public function destroy($id)

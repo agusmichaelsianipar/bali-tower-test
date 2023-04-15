@@ -13,7 +13,9 @@ Interface NewsRepositoryInterface{
 
     public function storeImageNews($data);
 
-    public function updateNewsById($data, $id);
+    public function destroyImageStorage($id);
+
+    public function updateNewsById($data, $id, $imageName);
     
     public function destroyNewsById($id);
 }

@@ -58,12 +58,25 @@ class NewsRepository implements NewsRepositoryInterface {
            "mime" => $file->getClientMimeType() 
         );
 
-        return 'storage/assets/image'.'/'.$uploadedImageResponse["image_name"];
+        return 'assets/image'.'/'.$uploadedImageResponse["image_name"];
 
     }
     
-    public function updateNewsById($data, $id){
+    public function updateNewsById($data, $id, $imageName){
 
+        return News::where('id', $id)->update([
+            'title' => $data->title,
+            'content' => $data->content,
+            'image' => $imageName
+        ]);
+        
+    }
+    
+    public function destroyImageStorage($id){
+        $news = News::find($id);
+
+        return Storage::disk('public')->delete($news->image);
+        
     }
     
     public function destroyNewsById($id){
