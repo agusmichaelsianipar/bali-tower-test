@@ -2,10 +2,10 @@
 
 namespace BTNewsApp\Http\Middleware;
 
-use BTNewsApp\Providers\RouteServiceProvider;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use BTNewsApp\App\Providers\RouteServiceProvider;
 
 class RedirectIfAuthenticated
 {

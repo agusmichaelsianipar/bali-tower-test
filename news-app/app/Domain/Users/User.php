@@ -2,6 +2,7 @@
 
 namespace BTNewsApp\Domain\Users;
 
+use BTNewsApp\Domain\News\News;
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -42,4 +43,8 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function news(){
+        return $this->hasMany(News::class);
+    }
 }

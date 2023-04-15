@@ -3,6 +3,8 @@
 namespace BTNewsApp\Domain\News\Repositories;
 
 use BTNewsApp\Domain\News\News;
+use BTNewsApp\Domain\Users\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use BTNewsApp\App\Log\Event\LogActivityEvent;
 use BTNewsApp\Http\News\Resources\NewsResource;
@@ -11,15 +13,15 @@ use BTNewsApp\Infrastructure\News\Repositories\NewsRepositoryInterface;
 class NewsRepository implements NewsRepositoryInterface {
     
     private $model;
-
     public function __construct(News $model){
+
         $this->model = $model;
+        
     }
 
     public function newsLog($event, $url, $method, $ip, $user_agent){
-        $user_id = 1 ;
-
-        event(new LogActivityEvent($event, $user_id, $url,$method, $ip,$user_agent));
+        $user = User::find(Auth::user()->id);
+        event(new LogActivityEvent($event, $user->id, $url,$method, $ip,$user_agent));
 
     }
 
@@ -27,9 +29,7 @@ class NewsRepository implements NewsRepositoryInterface {
 
         $data = News::paginate(10);
 
-        return [
-            'key' => NewsResource::collection($data)->response()->getData(true)
-        ];
+        return NewsResource::collection($data)->response()->getData(true);
     }
 
     public function showById($id){
@@ -39,19 +39,15 @@ class NewsRepository implements NewsRepositoryInterface {
 
     public function storeNews($data, $imageName){
 
-        $user = 1;
-        
-        $news = News::create([
-            'user_id' => $user,
+        $user = User::find(Auth::user()->id);
+    
+        $news =  News::create([
+            'user_id' => $user->id,
             'title' => $data->title,
             'content' => $data->content,
             'image' => $imageName
         ]);
-
-        return response()->json([
-            'status' => true,
-            'data' => $news
-        ],200);
+        return new NewsResource($news);
     }
 
     public function storeImageNews($data){

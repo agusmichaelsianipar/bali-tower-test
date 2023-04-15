@@ -7,23 +7,30 @@ use BTNewsApp\App\Controllers\Controller;
 use BTNewsApp\Http\News\Requests\CreateNewsRequest;
 use BTNewsApp\Http\News\Requests\UpdateNewsRequest;
 use BTNewsApp\Infrastructure\News\Repositories\NewsRepositoryInterface;
+use Illuminate\Support\Facades\Auth;
 
 class NewsController extends Controller
 {
     private $newsRepository;
     public function __construct(NewsRepositoryInterface $newsRepository){
-        // $this->middleware('is.admin')->except('index','show');
+
+        $this->middleware(['auth:api','isAdmin'])->except('index','show');
+        
         $this->newsRepository = $newsRepository;
 
     }
     public function index()
     {
-        return $this->newsRepository->index();
+        $news = $this->newsRepository->index();
+
+        return $this->jsonSuccessResponse($news);
     }
 
     public function show($id)
     {
-        return $this->newsRepository->showById($id);
+        $news = $this->newsRepository->showById($id);
+
+        return $this->jsonSuccessResponse($news);
     }
 
     public function store(CreateNewsRequest $request)
@@ -31,14 +38,10 @@ class NewsController extends Controller
         $imageName = $this->newsRepository->storeImageNews($request);
         
         $news = $this->newsRepository->storeNews($request, $imageName);
-
+        
         $this->newsRepository->newsLog("News successfully created!",$request->url(), $request->method(), $request->ip(), $request->userAgent());
 
-        return response()->json([
-            'status' => true,
-            'message'=> "News created successfully",
-            'news' => $news,
-        ],200);
+        return $this->jsonSuccessResponse($news);
     }
 
     public function update(UpdateNewsRequest $request, $id)
@@ -51,10 +54,7 @@ class NewsController extends Controller
         
         $this->newsRepository->newsLog("News successfully updated!",$request->url(), $request->method(), $request->ip(), $request->userAgent());
 
-        return response()->json([
-            'status' => true,
-            'message'=> "News updated successfully",
-        ],200);
+        return $this->jsonSuccessResponse(null);
     }
 
     public function destroy(Request $request, $id)
@@ -63,9 +63,6 @@ class NewsController extends Controller
 
         $this->newsRepository->newsLog("News successfully deleted!", $request->url(), $request->method(), $request->ip(), $request->userAgent());
 
-        return response()->json([
-            'status' => true,
-            'message'=> "News deleted successfully",
-        ],200);
+        return $this->jsonSuccessResponse(null);
     }
 }

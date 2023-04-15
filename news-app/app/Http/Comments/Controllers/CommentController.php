@@ -13,31 +13,44 @@ class CommentController extends Controller
     private $commentRepository;
 
     public function __construct(CommentRepositoryInterface $commentRepository){
+
+        $this->middleware('auth:api')->except('index','show');
+
         $this->commentRepository = $commentRepository;
     }
     public function index($newsId)
     {
-        return $this->commentRepository->getCommentByNewsId($newsId);
+        $comments = $this->commentRepository->getCommentByNewsId($newsId);
+
+        return $this->jsonSuccessResponse($comments);
         
     }
 
     public function store(CreateCommentRequest $request, $newsId)
     {
-        return $this->commentRepository->storeComment($request, $newsId);
+        $comment = $this->commentRepository->storeComment($request, $newsId);
+
+        return $this->jsonSuccessResponse($comment);
     }
 
     public function show($newsId, $commentId)
     {
-        return $this->commentRepository->getCommentById($commentId);
+        $comment = $this->commentRepository->getCommentById($commentId);
+
+        return $this->jsonSuccessResponse($comment);
     }
 
     public function update(UpdateCommentRequest $request, $newsId, $commentId)
     {
-        return $this->commentRepository->updateComment($request, $commentId);
+        $this->commentRepository->updateComment($request, $commentId);
+
+        return $this->jsonSuccessResponse(null);
     }
 
     public function destroy($commentId, $newsId)
     {
-        return $this->commentRepository->deleteComment($newsId);
+        $this->commentRepository->deleteComment($newsId);
+        
+        return $this->jsonSuccessResponse(null);
     }
 }
