@@ -176,6 +176,10 @@ return [
         BTNewsApp\App\Providers\RouteServiceProvider::class,
         Laravel\Passport\PassportServiceProvider::class,
 
+        /*
+         * Domain Service Providers...
+         */
+         BTNewsApp\Domain\Users\Providers\UserServiceProvider::class,
     ],
 
     /*
