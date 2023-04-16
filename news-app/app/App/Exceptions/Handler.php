@@ -2,8 +2,10 @@
 
 namespace BTNewsApp\App\Exceptions;
 
+use Exception;
 use Throwable;
 use Illuminate\Auth\AuthenticationException;
+use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
 class Handler extends ExceptionHandler
@@ -38,6 +40,16 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
+    }
+
+    public function render($request, Exception $e)
+    {
+        if ($e instanceof \Illuminate\Database\Eloquent\ModelNotFoundException) 
+        {
+           abort(404, 'Oops...Not found!');
+        }
+
+        return parent::render($request, $e);
     }
     
     protected function unauthenticated($request, AuthenticationException $exception)
