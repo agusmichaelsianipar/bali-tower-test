@@ -2,8 +2,9 @@
 
 namespace BTNewsApp\Domain\Logs;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use BTNewsApp\Domain\Users\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Log extends Model
 {

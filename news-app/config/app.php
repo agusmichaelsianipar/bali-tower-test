@@ -181,6 +181,8 @@ return [
          */
         BTNewsApp\Domain\Users\Providers\UserServiceProvider::class,
         BTNewsApp\Domain\News\Providers\NewsServiceProvider::class,
+        BTNewsApp\Domain\Comments\Providers\CommentServiceProvider::class,
+        BTNewsApp\Domain\Logs\Providers\LogServiceProvider::class,
     ],
 
     /*

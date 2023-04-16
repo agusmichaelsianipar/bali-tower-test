@@ -19,10 +19,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind(NewsRepositoryInterface::class, NewsRepository::class);
-        $this->app->bind(CommentRepositoryInterface::class, CommentRepository::class);
-        $this->app->bind(LogRepositoryInterface::class, LogRepository::class);
-        
+        // 
     }
 
     /**
