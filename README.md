@@ -71,4 +71,4 @@
 Thankyou
 
 ## POSTMAN COLLECTION LINK
-https://www.postman.com/agusmichaelsianipar/workspace/public-workspace/api/e182a954-208c-47fe-80c6-d6718c6fe71b
+https://www.postman.com/agusmichaelsianipar/workspace/public-workspace/collection/25289606-e72b2e22-50f1-4941-ba6a-e512c2781103?action=share&creator=25289606
