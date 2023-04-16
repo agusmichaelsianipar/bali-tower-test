@@ -42,15 +42,6 @@ class Handler extends ExceptionHandler
         });
     }
 
-    public function render($request, Exception $e)
-    {
-        if ($e instanceof \Illuminate\Database\Eloquent\ModelNotFoundException) 
-        {
-           abort(404, 'Oops...Not found!');
-        }
-
-        return parent::render($request, $e);
-    }
     
     protected function unauthenticated($request, AuthenticationException $exception)
     {
