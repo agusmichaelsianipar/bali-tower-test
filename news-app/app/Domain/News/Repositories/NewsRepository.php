@@ -3,50 +3,72 @@
 namespace BTNewsApp\Domain\News\Repositories;
 
 use BTNewsApp\Domain\News\News;
-use BTNewsApp\Domain\Users\User;
+use BTNewsApp\Infrastructure\News\Queries\DeleteNewsQueryContract;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use BTNewsApp\App\Log\Event\LogActivityEvent;
 use BTNewsApp\Http\News\Resources\NewsResource;
+use BTNewsApp\Infrastructure\News\Queries\ShowNewsQueryContract;
+use BTNewsApp\Infrastructure\News\Queries\StoreNewsQueryContract;
+use BTNewsApp\Infrastructure\News\Queries\UpdateNewsQueryContract;
+use BTNewsApp\Infrastructure\Users\Queries\FindUserByIdQueryContract;
 use BTNewsApp\Infrastructure\News\Repositories\NewsRepositoryInterface;
+use BTNewsApp\Infrastructure\News\Queries\FetchNewsWithPaginateQueryContract;
 
 class NewsRepository implements NewsRepositoryInterface {
     
-    private $model;
-    public function __construct(News $model){
-
-        $this->model = $model;
+    private $findUserByIdQuery, $fetchNewsWithPaginateQuery;
+    private $showNewsQuery, $storeNewsQuery, $updateNewsQuery;
+    private $deleteNewsQuery;
+    public function __construct(
+        FetchNewsWithPaginateQueryContract $fetchNewsWithPaginateQuery,
+        ShowNewsQueryContract $showNewsQuery,
+        FindUserByIdQueryContract $findUserByIdQuery,
+        StoreNewsQueryContract $storeNewsQuery,
+        UpdateNewsQueryContract $updateNewsQuery,
+        DeleteNewsQueryContract $deleteNewsQuery
+    ){
+        $this->fetchNewsWithPaginateQuery = $fetchNewsWithPaginateQuery;
+        $this->showNewsQuery = $showNewsQuery;
+        $this->findUserByIdQuery = $findUserByIdQuery;
+        $this->storeNewsQuery = $storeNewsQuery;
+        $this->updateNewsQuery = $updateNewsQuery;
+        $this->deleteNewsQuery = $deleteNewsQuery;
         
     }
 
     public function newsLog($event, $url, $method, $ip, $user_agent){
-        $user = User::find(Auth::user()->id);
+
+        $user = $this->findUserByIdQuery->handle(Auth::user()->id);
+
         event(new LogActivityEvent($event, $user->id, $url,$method, $ip,$user_agent));
+
 
     }
 
     public function index(){
 
-        $data = News::paginate(10);
+        $initPaginate = 10;
+
+        $data = $this->fetchNewsWithPaginateQuery->handle($initPaginate); 
 
         return NewsResource::collection($data)->response()->getData(true);
+
     }
 
     public function showById($id){
-        
-        return new NewsResource($this->model->with('comment')->findOrFail($id));
+
+        $news = $this->showNewsQuery->handle($id);
+
+        return new NewsResource($news);
     }
 
     public function storeNews($data, $imageName){
 
-        $user = User::find(Auth::user()->id);
+        $users = $this->findUserByIdQuery->handle(Auth::user()->id);
     
-        $news =  News::create([
-            'user_id' => $user->id,
-            'title' => $data->title,
-            'content' => $data->content,
-            'image' => $imageName
-        ]);
+        $news = $this->storeNewsQuery->handle($data, $users, $imageName);
+
         return new NewsResource($news);
     }
 
@@ -68,16 +90,12 @@ class NewsRepository implements NewsRepositoryInterface {
     
     public function updateNewsById($data, $id, $imageName){
 
-        return News::where('id', $id)->update([
-            'title' => $data->title,
-            'content' => $data->content,
-            'image' => $imageName
-        ]);
-        
+        return $this->updateNewsQuery->handle($data, $id, $imageName);
     }
     
     public function destroyImageStorage($id){
-        $news = News::find($id);
+
+        $news = $this->showNewsQuery->handle($id);
 
         return Storage::disk('public')->delete($news->image);
         
@@ -85,11 +103,8 @@ class NewsRepository implements NewsRepositoryInterface {
     
     public function destroyNewsById($id){
         
-        $news = News::findOrFail($id);
 
-        $news->delete();
-
-        return 1;
+        return $this->deleteNewsQuery->handle($id);
     }
 }
 

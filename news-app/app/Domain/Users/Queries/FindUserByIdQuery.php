@@ -2,9 +2,9 @@
 namespace BTNewsApp\Domain\Users\Queries;
 
 use BTNewsApp\Domain\Users\User;
-use BTNewsApp\Infrastructure\Users\Queries\FindUserByIdContract;
+use BTNewsApp\Infrastructure\Users\Queries\FindUserByIdQueryContract;
 
-class FindUserById implements FindUserByIdContract
+class FindUserByIdQuery implements FindUserByIdQueryContract
 {
     public function handle($user_id){
         return User::query()->find($user_id);

@@ -16,7 +16,7 @@ class LogResource extends JsonResource
             'method' => $this->method,
             'ip_address' => $this->ip_address,
             'user_agent' => $this->user_agent,
-            'user_id' => new UserResource($this->user),
+            'user' => new UserResource($this->user),
         ];
     }
 }

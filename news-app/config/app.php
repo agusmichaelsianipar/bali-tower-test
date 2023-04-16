@@ -179,7 +179,8 @@ return [
         /*
          * Domain Service Providers...
          */
-         BTNewsApp\Domain\Users\Providers\UserServiceProvider::class,
+        BTNewsApp\Domain\Users\Providers\UserServiceProvider::class,
+        BTNewsApp\Domain\News\Providers\NewsServiceProvider::class,
     ],
 
     /*

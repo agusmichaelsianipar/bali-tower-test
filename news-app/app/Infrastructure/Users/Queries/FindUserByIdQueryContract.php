@@ -2,6 +2,6 @@
 
 namespace BTNewsApp\Infrastructure\Users\Queries;
 
-Interface FindUserByIdContract{
+Interface FindUserByIdQueryContract{
     public function handle($user_id);
 }
